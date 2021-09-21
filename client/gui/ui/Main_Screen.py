@@ -14,20 +14,18 @@ from Form import Ui_Submit
 
 class Ui_MainWindow(object):
 
-    def __init__(self):
-        self.currentwindow = None
-
     def OnclickOpenForm(self):
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Submit()
-        self.ui.setupUi(self.window)
-        MainWindow.hide()
+        #self.ui = Ui_Submit()
+        #self.ui.setupUi(self.window)
+        self.ui = Ui_Submit(self.window)
+        self.currentwindow.hide()
         self.window.show()
 
 
 
 
-    def setupUi(self, MainWindow):
+    def __init__(self, MainWindow):
         self.currentwindow = MainWindow
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(775, 528)
@@ -75,7 +73,8 @@ if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
+    #ui = Ui_MainWindow()
+    #ui.setupUi(MainWindow)
+    ui = Ui_MainWindow(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())

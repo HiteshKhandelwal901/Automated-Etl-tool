@@ -17,16 +17,18 @@ class Ui_Submit(object):
     def __init__(self):
         print("inside init")
         self.currentwindow = None
+        self.values = dict()
+        self.selected = "IMAGE-DATASET"
 
     def OnclickOpenMessage(self):
-        print("val type = ", self.currentwindow,type(self.currentwindow))
+        #print("val type = ", self.currentwindow,type(self.currentwindow))
         self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_Success()
-        self.ui.setupUi(self.window)
+        self.ui = Ui_Success(self.window)
+        #self.ui.setupUi(self.window)
         self.currentwindow.setVisible(False)
         self.window.show()
 
-    def setupUi(self, Submit):
+    def __init__(self, Submit):
         self.currentwindow = Submit
         #print("type submit = ", type(Submit))
         Submit.setObjectName("Submit")
@@ -184,7 +186,7 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     #Submit = QtWidgets.QMainWindow()
     Submit = QtWidgets.QWidget()
-    ui = Ui_Submit()
-    ui.setupUi(Submit)
+    ui = Ui_Submit(submit)
+    #ui.setupUi(Submit)
     Submit.show()
     sys.exit(app.exec_())
