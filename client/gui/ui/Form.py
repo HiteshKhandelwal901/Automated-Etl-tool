@@ -13,127 +13,258 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Submit(object):
 
-
-    def __init__(self):
-        print("inside init")
-        self.currentwindow = None
-        self.values = dict()
-        self.selected = "IMAGE-DATASET"
-
     def OnclickOpenMessage(self):
-        #print("val type = ", self.currentwindow,type(self.currentwindow))
+
+        #storing input and output paths in dictionary
+        input_path  = self.inpu_path.toPlainText()
+        self.user_inputs['input_path'] = input_path
+        output_path = self.output_path.toPlainText()
+        self.user_inputs['output_path'] = output_path
+        print("input path = {} and output path = {}".format(input_path, output_path))
+
+        #Storing output format
+        bool_images                = self.checkBox.checkState()
+        self.user_inputs['Images']      = bool_images
+        print("c1 = ", self.checkBox.checkState())
+        self.user_inputs['TFR-RECORDS'] = self.checkBox_2.checkState()
+        print("c2 = ", self.checkBox_2.checkState())
+        self.user_inputs['CSV']         = self.checkBox_3.checkState()
+        print("c3 = ", self.checkBox_3.checkState())
+        self.user_inputs['TF-DATA']     = self.checkBox_4.checkState()
+        print("c4 = ", self.checkBox_4.checkState())
+
+        #Augmentation self.user_inputs
+        self.user_inputs['Aug-Rotate']      = self.checkBox_5.checkState()
+        print("c5 = ", self.checkBox_5.checkState())
+        self.user_inputs['Rotate-Spin-Val'] = self.rotate_2.value()
+        print("spin rot value  =", self.rotate_2.value())
+
+        self.user_inputs['Aug-Scale']       = self.checkBox_8.checkState()
+        print("c8 = ", self.checkBox_8.checkState())
+        self.user_inputs['Scale-Spin-Val']  = self.scaling_2.value()
+        print("spin scale value  =", self.scaling_2.value())
+
+        self.user_inputs['Aug-Flip']        = self.checkBox_9.checkState()
+        print("c9 = ", self.checkBox_9.checkState())
+        self.user_inputs['FLip-Spin-Val']   = self.flipping_2.value()
+        print("spin flip value  =", self.flipping_2.value())
+
+        self.user_inputs['Aug-Saturation']  = self.checkBox_11.checkState()
+        print("c11 = ", self.checkBox_11.checkState())
+
+        self.user_inputs['Aug-Blurring']    = self.checkBox_13.checkState()
+        print("c13 = ", self.checkBox_13.checkState())
+
+        self.user_inputs['Aug-Crop']        = self.checkBox_7.checkState()
+        print("c7 = ", self.checkBox_7.checkState())
+
+        self.user_inputs['Aug-Noising']      = self.checkBox_12.checkState()
+        print("c9 = ", self.checkBox_12.checkState())
+
+        self.user_inputs['Aug-Brightness']   = self.checkBox_10.checkState()
+        print("c9 = ", self.checkBox_10.checkState())
+
+        #other OPTIONS
+
+        self.user_inputs['Resize']   = self.checkBox_6.checkState()
+        print("resize = ", self.checkBox_6.checkState())
+
+        self.user_inputs['Binary_Image']   = self.Binary_Image.checkState()
+        print("Binary_Image = ", self.Binary_Image.checkState())
+
+        self.user_inputs['Gray_Scale']   = self.Gray_Scale.checkState()
+        print("Gray_Scale = ", self.Gray_Scale.checkState())
+
+        self.user_inputs['Normalizing']   = self.Normalizing.checkState()
+        print("Normalizing = ", self.Normalizing.checkState())
+
+
+
+
+
+
+
+
+
+
+
+
         self.window = QtWidgets.QMainWindow()
         self.ui = Ui_Success(self.window)
-        #self.ui.setupUi(self.window)
         self.currentwindow.setVisible(False)
         self.window.show()
 
     def __init__(self, Submit):
+        print("inside init")
+        self.currentwindow = None
+        self.values = dict()
+        self.selected = "IMAGE-DATASET"
+        self.user_inputs = dict()
         self.currentwindow = Submit
         #print("type submit = ", type(Submit))
         Submit.setObjectName("Submit")
         Submit.resize(686, 572)
         self.centralwidget = QtWidgets.QWidget(Submit)
         self.centralwidget.setObjectName("centralwidget")
+
+
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(20, 20, 91, 16))
         self.label.setObjectName("label")
+
+
         self.inpu_path = QtWidgets.QTextEdit(self.centralwidget)
         self.inpu_path.setGeometry(QtCore.QRect(160, 10, 201, 31))
         self.inpu_path.setObjectName("inpu_path")
+
+
+
         self.label_2 = QtWidgets.QLabel(self.centralwidget)
         self.label_2.setGeometry(QtCore.QRect(380, 20, 221, 16))
         self.label_2.setObjectName("label_2")
+
+
         self.label_3 = QtWidgets.QLabel(self.centralwidget)
         self.label_3.setGeometry(QtCore.QRect(20, 80, 91, 20))
         self.label_3.setObjectName("label_3")
+
+
         self.output_path = QtWidgets.QTextEdit(self.centralwidget)
         self.output_path.setGeometry(QtCore.QRect(160, 70, 201, 31))
         self.output_path.setObjectName("output_path")
+
+
         self.label_4 = QtWidgets.QLabel(self.centralwidget)
         self.label_4.setGeometry(QtCore.QRect(380, 80, 221, 16))
         self.label_4.setObjectName("label_4")
+
+
         self.label_5 = QtWidgets.QLabel(self.centralwidget)
         self.label_5.setGeometry(QtCore.QRect(20, 140, 111, 20))
         self.label_5.setObjectName("label_5")
+
         self.checkBox = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox.setGeometry(QtCore.QRect(160, 140, 85, 21))
         self.checkBox.setObjectName("checkBox")
+
+
         self.checkBox_2 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_2.setGeometry(QtCore.QRect(260, 140, 111, 21))
         self.checkBox_2.setObjectName("checkBox_2")
+
+
         self.checkBox_3 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_3.setGeometry(QtCore.QRect(390, 140, 91, 21))
         self.checkBox_3.setObjectName("checkBox_3")
+
+
         self.checkBox_4 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_4.setGeometry(QtCore.QRect(490, 140, 85, 21))
         self.checkBox_4.setObjectName("checkBox_4")
+
+
         self.label_6 = QtWidgets.QLabel(self.centralwidget)
         self.label_6.setGeometry(QtCore.QRect(20, 190, 111, 20))
         self.label_6.setObjectName("label_6")
+
+
         self.checkBox_5 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_5.setGeometry(QtCore.QRect(160, 190, 71, 21))
         self.checkBox_5.setObjectName("checkBox_5")
+
+
         self.checkBox_7 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_7.setGeometry(QtCore.QRect(350, 240, 51, 21))
         self.checkBox_7.setObjectName("checkBox_7")
+
+
         self.checkBox_8 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_8.setGeometry(QtCore.QRect(330, 190, 71, 21))
         self.checkBox_8.setObjectName("checkBox_8")
+
+
         self.checkBox_9 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_9.setGeometry(QtCore.QRect(480, 190, 71, 21))
         self.checkBox_9.setObjectName("checkBox_9")
+
+
         self.checkBox_10 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_10.setGeometry(QtCore.QRect(510, 240, 91, 21))
         self.checkBox_10.setObjectName("checkBox_10")
+
+
         self.checkBox_11 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_11.setGeometry(QtCore.QRect(160, 240, 91, 21))
         self.checkBox_11.setObjectName("checkBox_11")
+
+
         self.checkBox_12 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_12.setGeometry(QtCore.QRect(420, 240, 71, 21))
         self.checkBox_12.setObjectName("checkBox_12")
+
+
         self.checkBox_13 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_13.setGeometry(QtCore.QRect(260, 240, 71, 21))
         self.checkBox_13.setObjectName("checkBox_13")
+
+
         self.label_7 = QtWidgets.QLabel(self.centralwidget)
         self.label_7.setGeometry(QtCore.QRect(40, 340, 631, 20))
         self.label_7.setObjectName("label_7")
+
         self.checkBox_6 = QtWidgets.QCheckBox(self.centralwidget)
         self.checkBox_6.setGeometry(QtCore.QRect(30, 380, 61, 21))
         self.checkBox_6.setObjectName("checkBox_6")
+
+
         self.resize = QtWidgets.QPlainTextEdit(self.centralwidget)
         self.resize.setGeometry(QtCore.QRect(100, 380, 61, 31))
         self.resize.setObjectName("resize")
+
         self.Binary_Image = QtWidgets.QCheckBox(self.centralwidget)
         self.Binary_Image.setGeometry(QtCore.QRect(30, 420, 111, 21))
         self.Binary_Image.setObjectName("Binary_Image")
+
+
         self.Normalizing = QtWidgets.QCheckBox(self.centralwidget)
         self.Normalizing.setGeometry(QtCore.QRect(30, 480, 101, 21))
         self.Normalizing.setObjectName("Normalizing")
+
+
         self.label_8 = QtWidgets.QLabel(self.centralwidget)
         self.label_8.setGeometry(QtCore.QRect(210, 380, 351, 16))
         self.label_8.setObjectName("label_8")
+
+
         self.Gray_Scale = QtWidgets.QCheckBox(self.centralwidget)
         self.Gray_Scale.setGeometry(QtCore.QRect(30, 450, 101, 21))
         self.Gray_Scale.setObjectName("Gray_Scale")
+
+
         self.rotate_2 = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.rotate_2.setGeometry(QtCore.QRect(240, 190, 66, 24))
         self.rotate_2.setMinimum(0.0)
         self.rotate_2.setMaximum(360.0)
         self.rotate_2.setSingleStep(10.0)
         self.rotate_2.setObjectName("rotate_2")
+
+
         self.scaling_2 = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.scaling_2.setGeometry(QtCore.QRect(400, 190, 66, 24))
         self.scaling_2.setMinimum(0.0)
         self.scaling_2.setMaximum(360.0)
         self.scaling_2.setSingleStep(10.0)
         self.scaling_2.setObjectName("scaling_2")
+
+
         self.flipping_2 = QtWidgets.QDoubleSpinBox(self.centralwidget)
         self.flipping_2.setGeometry(QtCore.QRect(560, 190, 66, 24))
         self.flipping_2.setMinimum(0.0)
         self.flipping_2.setMaximum(360.0)
         self.flipping_2.setSingleStep(10.0)
         self.flipping_2.setObjectName("flipping_2")
+
+
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton.setGeometry(QtCore.QRect(559, 482, 91, 31))
         self.pushButton.setObjectName("pushButton")
