@@ -9,10 +9,26 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
+from Form import Ui_Submit
 
 
 class Ui_MainWindow(object):
+
+    def __init__(self):
+        self.currentwindow = None
+
+    def OnclickOpenForm(self):
+        self.window = QtWidgets.QMainWindow()
+        self.ui = Ui_Submit()
+        self.ui.setupUi(self.window)
+        MainWindow.hide()
+        self.window.show()
+
+
+
+
     def setupUi(self, MainWindow):
+        self.currentwindow = MainWindow
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(775, 528)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -20,6 +36,7 @@ class Ui_MainWindow(object):
         self.ImagrButton = QtWidgets.QPushButton(self.centralwidget)
         self.ImagrButton.setGeometry(QtCore.QRect(150, 130, 191, 111))
         self.ImagrButton.setObjectName("ImagrButton")
+        self.ImagrButton.clicked.connect(self.OnclickOpenForm)
         self.StructuredButton = QtWidgets.QPushButton(self.centralwidget)
         self.StructuredButton.setGeometry(QtCore.QRect(420, 130, 191, 111))
         self.StructuredButton.setObjectName("StructuredButton")
