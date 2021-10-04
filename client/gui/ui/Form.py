@@ -9,6 +9,8 @@
 
 from Success import Ui_Success
 from PyQt5 import QtCore, QtGui, QtWidgets
+#to be moved
+import pickle
 
 
 class Ui_Submit(object):
@@ -18,12 +20,14 @@ class Ui_Submit(object):
         #storing input and output paths in dictionary
         input_path  = self.inpu_path.toPlainText()
         self.user_inputs['input_path'] = input_path
+        self.user_inputs['temp_input_path'] = 'Data/train'
         output_path = self.output_path.toPlainText()
         self.user_inputs['output_path'] = output_path
+        self.user_inputs['temp_output_path'] = '/'
         print("input path = {} and output path = {}".format(input_path, output_path))
 
         #Storing output format
-        bool_images                = self.checkBox.checkState()
+        bool_images  = self.checkBox.checkState()
         self.user_inputs['Images']      = bool_images
         print("c1 = ", self.checkBox.checkState())
         self.user_inputs['TFR-RECORDS'] = self.checkBox_2.checkState()
@@ -78,7 +82,14 @@ class Ui_Submit(object):
         self.user_inputs['Normalizing']   = self.Normalizing.checkState()
         print("Normalizing = ", self.Normalizing.checkState())
 
+        #to be moved to seprate pickle_file
+        with open('server/config/user_inputs.pickle', 'wb') as f:
+            pickle.dump(self.user_inputs, f)
 
+        with open('server/config/user_inputs.pickle', 'rb') as f:
+            user_inputs = pickle.load(f)
+
+        print("user inputs = ", user_inputs)
 
 
 
